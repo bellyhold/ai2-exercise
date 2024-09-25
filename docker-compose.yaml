@@ -1,0 +1,21 @@
+services:
+
+  api:
+    build: ./api
+    ports:
+      - "9090:9090"
+    environment:
+      FLASK_ENV: development
+      SATELLITE_PARTNER_API: "http://localhost:7200/api/task-satellite"
+      MONGODB_URI: "mongo:27017"
+    volumes: ['./api:/api']
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - db:/data/db
+
+volumes:
+  db:
